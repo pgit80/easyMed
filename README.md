@@ -65,8 +65,8 @@ Ensure you have the following installed on your machine:
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
+git clone https://github.com/pgit80/easyMed.git
+cd easyMed
 
 ``
 
@@ -83,9 +83,9 @@ docker-compose up --build -d
 ```
 4. **Access the Application Services:**
 * **React UI App:** `http://localhost:3000`
-* **Eureka Dashboard:** `http://localhost:8080`
-* **Consumer Endpoints:** `http://localhost:8086/consumer/...`
-* **Producer Endpoints:** `http://localhost:8085/orders/...`
+* **Eureka Dashboard:** `http://localhost:8080/eureka`
+* **Consumer Endpoints:** `http://localhost:8090/consumer/...`
+* **Producer Endpoints:** `http://localhost:8085/...`
 
 
 5. **Stop the Application:**
@@ -114,7 +114,6 @@ docker-compose down
 ├── easyMedProducer/        # Producer Microservice (JPA + MySQL)
 ├── easyMedConsumer/        # Consumer Microservice (Feign Client)
 ├── easymed-ui/             # React Frontend App
-├── k8s/                    # Kubernetes Deployment Manifests
 ├── docker-compose.yml      # Docker Multi-container Configuration
 ├── .gitignore              # Ignored dependencies & build files
 └── README.md               # Project documentation
