@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # 1. MySQL Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: easyMedDB
+      MYSQL_ROOT_PASSWORD: 2110
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Eureka Discovery Server
+  eureka-server:
+    build: ./easymed-eureka
+    container_name: eureka-server
+    ports:
+      - "8080:8080"
+
+  # 3. Producer Microservice
+  producer-service:
+    build: ./easyMedProducer
+    container_name: producer-service
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/easyMedDB
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8080/eureka
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+
+  # 4. Consumer Microservice
+  consumer-service:
+    build: ./easyMedConsumer
+    container_name: consumer-service
+    ports:
+      - "8090:8090"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8080/eureka
+    depends_on:
+      - eureka-server
+      - producer-service
+
+  # 5. React Frontend App
+  frontend-ui:
+    build: ./easymed-ui
+    container_name: frontend-ui
+    ports:
+      - "3000:80"
+    depends_on:
+      - consumer-service
