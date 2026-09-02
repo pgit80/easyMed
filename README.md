@@ -46,6 +46,7 @@ The entire project is fully containerized with Docker Compose deployment.
 * **Backend:** Java 21, Spring Boot, Spring Cloud (Eureka, OpenFeign), Spring Data JPA
 * **Database:** MySQL 8.0
 * **DevOps & Containerization:** Docker, Docker Compose
+* **Documentation:** Now supported with swagger-ui documentation for easy visualtization of API endpoints :)
 
 ---
 
