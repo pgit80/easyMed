@@ -1,4 +1,4 @@
-# EasyMed - Microservices Medicine Order System
+# EasyMed - Based Microservices Medicine Order System
 
 EasyMed is a microservices-based application designed for managing medicine orders. Built with Spring Boot, Spring Cloud, and React, it demonstrates end-to-end service discovery, inter-service communication via Feign Clients, dynamic persistence with MySQL, and a simple frontend interface.
 
